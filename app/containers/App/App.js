@@ -11,20 +11,21 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
+import DetailPage from 'containers/DetailPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 const App = () => (
-  <div>
+  <>
     <Header />
     <Switch>
+      <Route path="/:uuid" component={DetailPage} />
       <Route exact path="/" component={HomePage} />
       <Route path="" component={NotFoundPage} />
     </Switch>
     <Footer />
-  </div>
+  </>
 );
 
 export default App;
