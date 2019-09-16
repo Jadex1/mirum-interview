@@ -2,9 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 300px;
+    position: relative;
 `;
-
+const StyledUL = styled.ul`
+    padding: 0;
+    margin: 0;
+    list-style-type: none
+`;
 class Carousel extends Component {
     constructor(props) {
         super(props);
@@ -59,12 +67,15 @@ class Carousel extends Component {
                 <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
                     <ul>
                         {this.props.slides.map((slide, index) => {
+                            <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
+
                             <StyledImageSlide 
                                 key={index}
                                 index={index}
                                 activeIndex={this.state.activeIndex}
                                 slide={slide}
                             />
+
                         })}
                     </ul>
                 <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
