@@ -25,8 +25,8 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
     return (
       <>
         <Wrapper>
-          <h1>The Amazing Site!</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+          <h1>The Faces of The Doctor</h1>
+          <p>The Doctor is an alien humanoid species of the kind called "timelords". Timelords have regnerations, they retain all the same memories, but different apperance and demenor.</p>
         </Wrapper>
       </>
     );

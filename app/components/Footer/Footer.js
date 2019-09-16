@@ -15,9 +15,9 @@ const Wrapper = styled.footer`
     }    
 `;
 const Footer = () => (
-  <Wrapper>
-      <p>@2019</p>
-  </Wrapper>
+    <Wrapper>
+        <p>@2019</p>
+    </Wrapper>
 );
 
 export default Footer;
