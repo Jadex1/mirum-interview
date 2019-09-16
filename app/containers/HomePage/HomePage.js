@@ -73,7 +73,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         doctorNumber: "Eigth",
         doctorName: "Eigth Doctor",
         actorName: "Paul McGann",
-        description: "McGann portrays the eighth such incarnation, a passionate, enthusiastic, and eccentric character. His only companion in the television film is Grace Holloway (Daphne Ashbrook), a medical doctor whose surgery is partly responsible for triggering his regeneration. In the continued adventures of the character depicted in audio dramas, novels and comic books he travels alongside numerous other companions, including self-styled "Edwardian Adventuress" Charley, the alien Destrii and present-day humans Lucie and Sam.",
+        description: "McGann portrays the eighth such incarnation, a passionate, enthusiastic, and eccentric character. His only companion in the television film is Grace Holloway (Daphne Ashbrook), a medical doctor whose surgery is partly responsible for triggering his regeneration. In the continued adventures of the character depicted in audio dramas, novels and comic books he travels alongside numerous other companions, including self-styled \"Edwardian Adventuress\" Charley, the alien Destrii and present-day humans Lucie and Sam.",
         image: "https://upload.wikimedia.org/wikipedia/en/a/a1/Eighth_Doctor_%28Doctor_Who%29_%28cropped%29.jpg"
       },
       {

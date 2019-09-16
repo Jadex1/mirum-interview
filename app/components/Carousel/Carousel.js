@@ -65,19 +65,17 @@ class Carousel extends Component {
         return (
             <StyledContainer>
                 <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
-                    <ul>
+                    <StyledUL>
                         {this.props.slides.map((slide, index) => {
                             <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
-
                             <StyledImageSlide 
                                 key={index}
                                 index={index}
                                 activeIndex={this.state.activeIndex}
                                 slide={slide}
                             />
-
                         })}
-                    </ul>
+                    </StyledUL>
                 <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
                 <StyledCarouselIndicators 
                     key={index}
