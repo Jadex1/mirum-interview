@@ -1,11 +1,23 @@
 import React from 'react';
-// import Wrapper from './Wrapper';
-import './style.scss';
+import styled from 'styled-components';
 
+const Wrapper = styled.footer`
+    background-color: black;
+    overflow: hidden;
+    position: fixed;
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    p {
+        color: white;
+    }    
+`;
 const Footer = () => (
-  <footer>
-    <section>@2019</section>
-  </footer>
+  <Wrapper>
+      <p>@2019</p>
+  </Wrapper>
 );
 
 export default Footer;
