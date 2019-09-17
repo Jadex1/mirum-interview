@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import ImageSlide from './ImageSlide';
+import CarouselIndicator from './CarouselIndicator';
+// import ImageSlide from './ImageSlide';
 import CarouselLeftArrow from './CarouselLeftArrow';
 import CarouselRightArrow from './CarouselRightArrow';
 
@@ -11,10 +12,23 @@ const StyledContainer = styled.div`
     min-height: 300px;
     position: relative;
 `;
-const StyledUL = styled.ul`
-    padding: 0;
-    margin: 0;
-    list-style-type: none
+const StyledUl = styled.ul`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  bottom: 0;
+  
+  li {
+    &:nth-of-type(n + 2) {
+      margin-left: 9px;
+    }
+  }
 `;
 class Carousel extends Component {
   constructor(props) {
@@ -65,14 +79,12 @@ class Carousel extends Component {
   }
 
   render() {
-    const { currentIndex } = this.state;
+    const { currentIndex, activeIndex } = this.state;
     const { slides } = this.props;
     return (
-      <div>
-        {/* <StyledContainer> */}
-        <p>...hey</p>
-          {/* <CarouselLeftArrow onClick={(e) => this.goToPrevSlide(e)} /> */}
-          {/* <StyledUL>
+      <StyledContainer>
+        <CarouselLeftArrow onClick={(e) => this.goToPrevSlide(e)} />
+        {/* <StyledUL>
           {slides.map((slide, index) => (
             <ImageSlide
               key={index}
@@ -83,15 +95,21 @@ class Carousel extends Component {
           ))
           }
         </StyledUL> */}
-          {/* <CarouselRightArrow onClick={(e) => this.goToNextSlide(e)} /> */}
-          {/* <CarouselIndicators
-          key={index}
-          index={index}
-          activeIndex={this.state.activeIndex}
-          onClick={(e) => this.goToSlide(index)}
-        /> */}
-        {/* </StyledContainer> */}
-        </div>
+        {/* <CarouselRightArrow onClick={(e) => this.goToNextSlide(e)} /> */}
+        <CarouselRightArrow onClick={(e) => this.goToNextSlide(e)} />
+        <StyledUl>
+          {slides.map((slide, index) => (
+            <CarouselIndicator
+              key={index}
+              index={index}
+              activeIndex={activeIndex}
+              isActive={activeIndex === index}
+              onClick={(e) => this.goToSlide(index)}
+            />
+          ))}
+        </StyledUl>
+
+      </StyledContainer>
     );
   }
 }

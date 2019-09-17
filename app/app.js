@@ -6,6 +6,7 @@
  */
 
 // Needed for redux-saga es6 generator support
+import 'font-awesome/css/font-awesome.min.css';
 import '@babel/polyfill';
 
 // Import all the third party stuff
