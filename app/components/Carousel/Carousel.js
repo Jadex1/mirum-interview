@@ -31,7 +31,7 @@ class Carousel extends Component {
         e.preventDefault();
 
         let index = this.state.activeIndex;
-        left { slides } = this.props;
+        let { slides } = this.props;
         let slidesLength = slides.length;
 
         if (index < 1) {
@@ -48,7 +48,7 @@ class Carousel extends Component {
     goToNextSlide(e) {
         e.preventDefault();
         let index = this.state.activeIndex;
-        left { slides } = this.props;
+        let { slides } = this.props;
         let slidesLength =- slides.length -1;
 
         if (index === slidesLength) {
