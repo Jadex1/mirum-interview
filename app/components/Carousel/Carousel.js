@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import CarouselIndicator from './CarouselIndicator';
-// import ImageSlide from './ImageSlide';
+import ImageSlide from './ImageSlide';
 import CarouselLeftArrow from './CarouselLeftArrow';
 import CarouselRightArrow from './CarouselRightArrow';
 
@@ -79,23 +79,22 @@ class Carousel extends Component {
   }
 
   render() {
-    const { currentIndex, activeIndex } = this.state;
+    const { activeIndex } = this.state;
     const { slides } = this.props;
     return (
       <StyledContainer>
         <CarouselLeftArrow onClick={(e) => this.goToPrevSlide(e)} />
-        {/* <StyledUL>
+        <StyledUl>
           {slides.map((slide, index) => (
             <ImageSlide
               key={index}
               index={index}
-              activeIndex={currentIndex}
+              activeIndex={activeIndex}
               slide={slide}
             />
           ))
           }
-        </StyledUL> */}
-        {/* <CarouselRightArrow onClick={(e) => this.goToNextSlide(e)} /> */}
+        </StyledUl>
         <CarouselRightArrow onClick={(e) => this.goToNextSlide(e)} />
         <StyledUl>
           {slides.map((slide, index) => (

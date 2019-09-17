@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 const StyledA = styled.a`
-    display: block;
+    display: ${(props) => (props.index === props.activeIndex ? 'block' : 'none')}};;
     width: 24px;
     height: 3px;
     background-color: #111;
     cursor: pointer;
-    opacity: .15;
+    opacity: ${(props) => (props.index === props.activeIndex ? '.75' : '.15')};
     transition: opacity .15s cubic-bezier(.4, 0, 1, 1);
 
     &:hover {

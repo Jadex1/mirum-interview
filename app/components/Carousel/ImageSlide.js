@@ -1,25 +1,33 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-const StyledLI = styled.li`
+const StyledLi = styled.li`
     margin-right: auto;
     margin-left: auto;
-    display: none;
+    display: ${(props) => (props.index === props.activeIndex ? 'block' : 'none')}};
     max-width: 900px;
     list-style-type: none;
     text-align: center;
 
     @media (max-width: 991px) {
-        padding-right: 60px;
-        padding-left: 60px;
-    }
-
-    &--active {
-        display: block;
-    }
+      padding-right: 60px;
+      padding-left: 60px;
+  }
 `;
-const StyledStrong = styled.strong`
 
+const StyledStrong = styled.strong`
+  font-family: 'Roboto', arial, sans-serif;
+  font-size: 14px;
+
+  @media (min-width: $breakpoint-desktop) {
+    font-size: 16px;
+  }
+`;
+
+const StyledP = styled.p`
+  margin-bottom: 19px;
+  font-family: 'Open Sans', 'Trebuchet MS', sans-serif;
+  font-size: 16px;
 `;
 
 const StyledSmall = styled.small`
@@ -31,24 +39,22 @@ const StyledSmall = styled.small`
     }
 `;
 
-class ImageSlide extends Component {
+class ImageSlide extends PureComponent {
   render() {
-    const { doctorNumber, actorName, image } = this.props;
+    const { doctorNumber, actorName, image } = this.props.slide;
     return (
       <>
-      <StyledLI>
-        <img src={image} alt={actorName} />
-        <p>
-            Doctor: {this.props.doctorNumber}
-            Actor: {this.props.actorName}
-        </p>
-        <StyledStrong>
-          {doctorNumber},
-        </StyledStrong>
-        <StyledSmall>
-          {actorName}
-        </StyledSmall>
-      </StyledLI>
+        <StyledLi>
+          {/* <img src={image} alt={actorName} /> */}
+          <StyledP>
+            <StyledStrong>
+              Doctor: {doctorNumber},
+            </StyledStrong>
+            <StyledSmall>
+              Actor: {actorName}
+            </StyledSmall>
+          </StyledP>
+        </StyledLi>
       </>
     );
   }
