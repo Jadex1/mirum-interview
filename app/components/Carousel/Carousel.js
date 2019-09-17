@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import ImageSlide from './ImageSlide';
+import CarouselLeftArrow from './CarouselLeftArrow';
+import CarouselRightArrow from './CarouselRightArrow';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -14,78 +17,83 @@ const StyledUL = styled.ul`
     list-style-type: none
 `;
 class Carousel extends Component {
-    constructor(props) {
-        super(props);
-        this.state= {
-            activeIndex: 0
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeIndex: 0
+    };
+  }
+
+  goToSlide(index) {
+    this.setState({
+      activeIndex: index
+    });
+  }
+
+  goToPrevSlide(e) {
+    e.preventDefault();
+
+    let index = this.state.activeIndex;
+    const { slides } = this.props;
+    const slidesLength = slides.length;
+
+    if (index < 1) {
+      index = slidesLength;
     }
 
-    goToSlide(index) {
-        this.setState({
-            activeIndex: index
-        })
+    --index;
+
+    this.setState({
+      activeIndex: index
+    });
+  }
+
+  goToNextSlide(e) {
+    e.preventDefault();
+    let index = this.state.activeIndex;
+    const { slides } = this.props;
+    const slidesLength = -slides.length - 1;
+
+    if (index === slidesLength) {
+      index = -1;
     }
+    ++index;
 
-    goToPrevSlide(e) {
-        e.preventDefault();
+    this.setState({
+      activeIndex: index
+    });
+  }
 
-        let index = this.state.activeIndex;
-        let { slides } = this.props;
-        let slidesLength = slides.length;
-
-        if (index < 1) {
-            index = slidesLength;
-        }
-
-        --index;
-
-        this.setState({
-            activeIndex: index
-        })
-    }
-
-    goToNextSlide(e) {
-        e.preventDefault();
-        let index = this.state.activeIndex;
-        let { slides } = this.props;
-        let slidesLength =- slides.length -1;
-
-        if (index === slidesLength) {
-            index = -1;
-        }
-        ++index;
-
-        this.setState({
-            activeIndex: index
-        });
-    }
-
-    render() {
-        return (
-            <StyledContainer>
-                <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
-                    <StyledUL>
-                        {this.props.slides.map((slide, index) => {
-                            <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
-                            <StyledImageSlide 
-                                key={index}
-                                index={index}
-                                activeIndex={this.state.activeIndex}
-                                slide={slide}
-                            />
-                        })}
-                    </StyledUL>
-                <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
-                <StyledCarouselIndicators 
-                    key={index}
-                    index={index}
-                    activeIndex={this.state.activeIndex}
-                    onClick={e => this.goToSlide(index)}
-                />
-            </StyledContainer>
-        );
-    }
+  render() {
+    const { currentIndex } = this.state;
+    const { slides } = this.props;
+    return (
+      <div>
+        {/* <StyledContainer> */}
+        <p>...hey</p>
+          {/* <CarouselLeftArrow onClick={(e) => this.goToPrevSlide(e)} /> */}
+          {/* <StyledUL>
+          {slides.map((slide, index) => (
+            <ImageSlide
+              key={index}
+              index={index}
+              activeIndex={currentIndex}
+              slide={slide}
+            />
+          ))
+          }
+        </StyledUL> */}
+          {/* <CarouselRightArrow onClick={(e) => this.goToNextSlide(e)} /> */}
+          {/* <CarouselIndicators
+          key={index}
+          index={index}
+          activeIndex={this.state.activeIndex}
+          onClick={(e) => this.goToSlide(index)}
+        /> */}
+        {/* </StyledContainer> */}
+        </div>
+    );
+  }
 }
 
 export default Carousel;
