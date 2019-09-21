@@ -5,16 +5,9 @@ import CarouselLeftArrow from './CarouselLeftArrow';
 import CarouselRightArrow from './CarouselRightArrow';
 
 const StyledContainer = styled.div`
-    display: inline-block;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    outline: 0px;
+  display: flex;
+  justify-content: center;
+  outline: 1px;
 `;
 
 const StyledUl = styled.ul`
@@ -39,7 +32,7 @@ class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0
+      currentIndex: 0
     }
   }
   //   this.setState({
@@ -81,35 +74,35 @@ class Carousel extends Component {
   //   });
   // }
 
-  goToIndex(index) {
-    const direction = (this.state.selectedIndex > index) ? 'previous' : 'next';
+  // goToIndex(index) {
+  //   const direction = (this.state.selectedIndex > index) ? 'previous' : 'next';
+  //
+  //   this.setState({
+  //     animationDirection: direction,
+  //     selectedIndex: index
+  //   });
+  // }
 
-    this.setState({
-      animationDirection: direction,
-      selectedIndex: index
-    });
-  }
+  // progressSlideshow() {
+  //   this.setState({ animationDirection: 'next' });
+  //
+  //   this.timeout = setTimeout(() => {
+  //     this.goInDirection('next');
+  //     this.progressSlideshow();
+  //   }, this.props.slideshowDelay);
+  // }
 
-  progressSlideshow() {
-    this.setState({ animationDirection: 'next' });
-
-    this.timeout = setTimeout(() => {
-      this.goInDirection('next');
-      this.progressSlideshow();
-    }, this.props.slideshowDelay);
-  }
-
-  componentDidMount() {
-    if (this.props.slideshowActive) {
-      this.progressSlideshow();
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.slideshowActive) {
+  //     this.progressSlideshow();
+  //   }
+  // }
 
   goInDirection(direction) {
     const totalImages = this.props.slides.length;
     const modifier = (direction === 'next') ? 1 : -1; // this is why, "previous", "next" is important
 
-    let newIndex = this.state.selectedIndex + modifier;
+    let newIndex = this.state.currentIndex + modifier;
 
     // these are for handling edge cases.
     if (newIndex === totalImages) {
@@ -119,18 +112,17 @@ class Carousel extends Component {
     }
 
     this.setState({
-      animationDirection: direction,
-      selectedImage: this.props.slides[newIndex]
+      currentIndex: newIndex
     });
   }
 
   renderCurrentSlide() {
-    const { activeIndex } = this.state;
-    const currentSlide = this.props.slides[activeIndex];
+    const { currentIndex } = this.state;
+    const currentSlide = this.props.slides[currentIndex];
     return (
       <ImageSlide
-        key={activeIndex.id}
-        index={activeIndex}
+        key={currentIndex.id}
+        index={currentIndex}
         slide={currentSlide}
       />
     );
@@ -144,18 +136,7 @@ class Carousel extends Component {
       <StyledContainer>
         <CarouselLeftArrow onClick={() => this.goInDirection('previous')} />
         {this.renderCurrentSlide()}
-        <CarouselRightArrow onClick={() => this.this.goInDirection('next')} />
-        {/*<StyledUl>*/}
-          {/*{slides.map((slide, index) => (*/}
-          {/*  <CarouselIndicator*/}
-          {/*    key={index}*/}
-          {/*    index={index}*/}
-          {/*    activeIndex={activeIndex}*/}
-          {/*    isActive={activeIndex === index}*/}
-          {/*    onClick={(e) => this.goToSlide(index)}*/}
-          {/*  />*/}
-          {/*))}*/}
-        {/*</StyledUl>*/}
+        <CarouselRightArrow onClick={() => this.goInDirection('next')} />
       </StyledContainer>
     );
   }

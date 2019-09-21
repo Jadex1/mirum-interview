@@ -63,7 +63,7 @@ const DOCTORS = [
     doctorName: 'Seventh Doctor',
     actorName: 'Sylvester McCoy',
     description: 'McCoy portrays the seventh such incarnation, a whimsical, thoughtful character who quickly becomes more layered, secretive, and manipulative. His first companion was Melanie Bush (Bonnie Langford), a computer programmer who travelled with his previous incarnation, and who is soon succeeded by troubled teenager and explosives expert Ace (Sophie Aldred), who becomes his protégée',
-    image: 'https://upload.wikimedia.org/wikipedia/en/8/89/Seventh_Doctor_%28Doctor_Whao%29.jpg'
+    image: 'https://upload.wikimedia.org/wikipedia/en/8/89/Seventh_Doctor_%28Doctor_Who%29.jpg'
   },
   {
     id: 8,
@@ -127,11 +127,7 @@ class HomePage extends Component { // eslint-disable-line react/prefer-stateless
     return (
       <>
         <Header />
-        <article>
-          <section>
-            <Carousel slides={doctors} />
-          </section>
-        </article>
+        <Carousel slides={doctors} />
       </>
     );
   }
