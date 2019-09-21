@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import CarouselIndicator from './CarouselIndicator';
 import ImageSlide from './ImageSlide';
 import CarouselLeftArrow from './CarouselLeftArrow';
 import CarouselRightArrow from './CarouselRightArrow';
 
 const StyledContainer = styled.div`
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     justify-content: center;
-    min-height: 300px;
-    position: relative;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    outline: 0px;
 `;
+
 const StyledUl = styled.ul`
   display: flex;
   flex-direction: row;
@@ -35,82 +40,138 @@ class Carousel extends Component {
     super(props);
     this.state = {
       activeIndex: 0
-    };
+    }
   }
+  //   this.setState({
+  //     activeIndex: index
+  //   });
+  // }
 
-  goToSlide(index) {
+  // goToPrevSlide(e) {
+  //   e.preventDefault();
+  //
+  //   let index = this.state.activeIndex;
+  //   const { slides } = this.props;
+  //   const slidesLength = slides.length;
+  //
+  //   if (index < 1) {
+  //     index = slidesLength;
+  //   }
+  //
+  //   --index;
+  //
+  //   this.setState({
+  //     activeIndex: index
+  //   });
+  // }
+
+  // goToNextSlide(e) {
+  //   e.preventDefault();
+  //   let index = this.state.activeIndex;
+  //   const { slides } = this.props;
+  //   const slidesLength = -slides.length - 1;
+  //
+  //   if (index === slidesLength) {
+  //     index = -1;
+  //   }
+  //   ++index;
+  //
+  //   this.setState({
+  //     activeIndex: index
+  //   });
+  // }
+
+  goToIndex(index) {
+    const direction = (this.state.selectedIndex > index) ? 'previous' : 'next';
+
     this.setState({
-      activeIndex: index
+      animationDirection: direction,
+      selectedIndex: index
     });
   }
 
-  goToPrevSlide(e) {
-    e.preventDefault();
+  progressSlideshow() {
+    this.setState({ animationDirection: 'next' });
 
-    let index = this.state.activeIndex;
-    const { slides } = this.props;
-    const slidesLength = slides.length;
+    this.timeout = setTimeout(() => {
+      this.goInDirection('next');
+      this.progressSlideshow();
+    }, this.props.slideshowDelay);
+  }
 
-    if (index < 1) {
-      index = slidesLength;
+  componentDidMount() {
+    if (this.props.slideshowActive) {
+      this.progressSlideshow();
+    }
+  }
+
+  goInDirection(direction) {
+    const totalImages = this.props.slides.length;
+    const modifier = (direction === 'next') ? 1 : -1; // this is why, "previous", "next" is important
+
+    let newIndex = this.state.selectedIndex + modifier;
+
+    // these are for handling edge cases.
+    if (newIndex === totalImages) {
+      newIndex = 0;
+    } else if (newIndex === -1) {
+      newIndex = totalImages - 1;
     }
 
-    --index;
-
     this.setState({
-      activeIndex: index
+      animationDirection: direction,
+      selectedImage: this.props.slides[newIndex]
     });
   }
 
-  goToNextSlide(e) {
-    e.preventDefault();
-    let index = this.state.activeIndex;
-    const { slides } = this.props;
-    const slidesLength = -slides.length - 1;
-
-    if (index === slidesLength) {
-      index = -1;
-    }
-    ++index;
-
-    this.setState({
-      activeIndex: index
-    });
+  renderCurrentSlide() {
+    const { activeIndex } = this.state;
+    const currentSlide = this.props.slides[activeIndex];
+    return (
+      <ImageSlide
+        key={activeIndex.id}
+        index={activeIndex}
+        slide={currentSlide}
+      />
+    );
   }
 
   render() {
-    const { activeIndex } = this.state;
     const { slides } = this.props;
+    // const Animation = React.addons.CSSTransitionGroup;
+
     return (
       <StyledContainer>
-        <CarouselLeftArrow onClick={(e) => this.goToPrevSlide(e)} />
-        <StyledUl>
-          {slides.map((slide, index) => (
-            <ImageSlide
-              key={index}
-              index={index}
-              activeIndex={activeIndex}
-              slide={slide}
-            />
-          ))
-          }
-        </StyledUl>
-        <CarouselRightArrow onClick={(e) => this.goToNextSlide(e)} />
-        <StyledUl>
-          {slides.map((slide, index) => (
-            <CarouselIndicator
-              key={index}
-              index={index}
-              activeIndex={activeIndex}
-              isActive={activeIndex === index}
-              onClick={(e) => this.goToSlide(index)}
-            />
-          ))}
-        </StyledUl>
-
+        <CarouselLeftArrow onClick={() => this.goInDirection('previous')} />
+        {this.renderCurrentSlide()}
+        <CarouselRightArrow onClick={() => this.this.goInDirection('next')} />
+        {/*<StyledUl>*/}
+          {/*{slides.map((slide, index) => (*/}
+          {/*  <CarouselIndicator*/}
+          {/*    key={index}*/}
+          {/*    index={index}*/}
+          {/*    activeIndex={activeIndex}*/}
+          {/*    isActive={activeIndex === index}*/}
+          {/*    onClick={(e) => this.goToSlide(index)}*/}
+          {/*  />*/}
+          {/*))}*/}
+        {/*</StyledUl>*/}
       </StyledContainer>
     );
   }
 }
+
+// propTypes: {
+//   slides: React.PropTypes.arrayOf([
+//     React.PropTypes.number,
+//     React.PropTypes.string,
+//     React.PropTypes.string,
+//     React.PropTypes.string,
+//     React.PropTypes.string,
+//     React.PropTypes.string
+//   ]).isRequired,
+//   slideshowActive: React.PropTypes.bool,
+//   slideshowDelay: React.PropTypes.number
+// };
 
 export default Carousel;

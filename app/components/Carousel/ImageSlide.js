@@ -1,13 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-const StyledLi = styled.li`
-    margin-right: auto;
-    margin-left: auto;
-    display: ${(props) => (props.index === props.activeIndex ? 'block' : 'none')}};
-    max-width: 900px;
-    list-style-type: none;
-    text-align: center;
+const StyledImageContainer = styled.div`
+    border: 1px solid #fff;
+		position: relative;
 
     @media (max-width: 991px) {
       padding-right: 60px;
@@ -43,19 +39,18 @@ class ImageSlide extends PureComponent {
   render() {
     const { doctorNumber, actorName, image } = this.props.slide;
     return (
-      <>
-        <StyledLi>
-          {/* <img src={image} alt={actorName} /> */}
-          <StyledP>
-            <StyledStrong>
-              Doctor: {doctorNumber},
-            </StyledStrong>
-            <StyledSmall>
-              Actor: {actorName}
-            </StyledSmall>
-          </StyledP>
-        </StyledLi>
-      </>
+      <StyledImageContainer>
+        <img src={image} alt={`missing img, ${doctorNumber}`}/>
+        <StyledP>
+          <StyledStrong>
+            Doctor: {doctorNumber},
+          </StyledStrong>
+          <br/>
+          <StyledSmall>
+            Actor: {actorName}
+          </StyledSmall>
+        </StyledP>
+      </StyledImageContainer>
     );
   }
 }
