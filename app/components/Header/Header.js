@@ -17,7 +17,6 @@ const Wrapper = styled.div`
         color: white;
     }
 `;
-// import './style.scss';
 
 class Header extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {

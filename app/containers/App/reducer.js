@@ -1,4 +1,4 @@
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
+import { LOAD_SOMETHING_SUCCESS, LOAD_SOMETHING, LOAD_SOMETHING_ERROR } from './constants';
 
 // The initial state of the App
 export const initialState = {
@@ -11,36 +11,51 @@ export const initialState = {
 };
 
 function appReducer(state = initialState, action) {
+
   switch (action.type) {
-    case LOAD_REPOS: {
+
+    case LOAD_SOMETHING: {
       const newState = {
         ...state,
+        // add metata data bleow
         loading: true,
-        error: false,
-        userData: {
-          repositories: false,
-        },
+        // error: false,
+        // userData: {
+        //   repositories: false,
+        // },
       };
-
       return newState;
     }
-    case LOAD_REPOS_SUCCESS: {
+
+    case LOAD_SOMETHING_SUCCESS: {
       const newState = {
         ...state,
         loading: false,
-        userData: {
-          repositories: action.repos,
-        },
-        currentUser: action.username,
+        //       userData: {
+        //         repositories: action.repos,
+        //       },
+        //       currentUser: action.username,
       };
       return newState;
     }
 
-    case LOAD_REPOS_ERROR: {
+    case LOAD_SOMETHING_ERROR: {
+      // const newState = {
+        // ...state,
+        // add metata data bleow
+        // loading: true,
+        // error: false,
+        // userData: {
+        //   repositories: false,
+        // },
+      // };
       return { ...state, error: action.error, loading: false };
+      // return newState;
     }
-    default:
+
+    default: {
       return state;
+    }
   }
 }
 

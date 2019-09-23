@@ -16,48 +16,48 @@
  */
 
 import {
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
+  LOAD_SOMETHING,
+  LOAD_SOMETHING_SUCCESS,
+  LOAD_SOMETHING_ERROR,
 } from './constants';
 
 /**
- * Load the repositories, this action starts the request saga
+ * Load the *__*, this action starts the request saga
  *
- * @return {object} An action object with a type of LOAD_REPOS
+ * @return {object} An action object with a type of LOAD_SOMETHING
  */
-export function loadRepos() {
+export function loadSomethings() {
   return {
-    type: LOAD_REPOS,
+    type: LOAD_SOMETHING,
   };
 }
 
 /**
- * Dispatched when the repositories are loaded by the request saga
+ * Dispatched when the *__*-ies are loaded by the request saga
  *
- * @param  {array} repos The repository data
+ * @param  {array} item The *__* data
  * @param  {string} username The current username
  *
  * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
  */
-export function reposLoaded(repos, username) {
+export function itemsLoaded(item, username) {
   return {
-    type: LOAD_REPOS_SUCCESS,
-    repos,
+    type: LOAD_SOMETHING_SUCCESS,
+    item,
     username,
   };
 }
 
 /**
- * Dispatched when loading the repositories fails
+ * Dispatched when loading the *__* fails
  *
  * @param  {object} error The error
  *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
+ * @return {object} An action object with a type of LOAD_SOMETHING_ERROR passing the error
  */
-export function repoLoadingError(error) {
+export function thingLoadingError(error) {
   return {
-    type: LOAD_REPOS_ERROR,
+    type: LOAD_SOMTHING_ERROR,
     error,
   };
 }
